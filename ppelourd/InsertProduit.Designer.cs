@@ -38,12 +38,13 @@ namespace ppelourd
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.labelVerif = new System.Windows.Forms.Label();
-            this.nudprix = new System.Windows.Forms.NumericUpDown();
             this.nudQuantite = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.txtdesc = new System.Windows.Forms.TextBox();
             this.txtMots = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.nudprix)).BeginInit();
+            this.txtPrix = new System.Windows.Forms.TextBox();
+            this.cbCategorie = new System.Windows.Forms.ComboBox();
+            this.cbImage = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantite)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,7 +103,7 @@ namespace ppelourd
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(222, 446);
+            this.btnClear.Location = new System.Drawing.Point(213, 557);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(102, 38);
             this.btnClear.TabIndex = 10;
@@ -112,7 +113,7 @@ namespace ppelourd
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(347, 446);
+            this.btnSubmit.Location = new System.Drawing.Point(338, 557);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(105, 38);
             this.btnSubmit.TabIndex = 11;
@@ -123,19 +124,12 @@ namespace ppelourd
             // labelVerif
             // 
             this.labelVerif.AutoSize = true;
-            this.labelVerif.Location = new System.Drawing.Point(207, 387);
+            this.labelVerif.Location = new System.Drawing.Point(198, 498);
             this.labelVerif.Name = "labelVerif";
             this.labelVerif.Size = new System.Drawing.Size(46, 17);
             this.labelVerif.TabIndex = 12;
             this.labelVerif.Text = "label6";
             this.labelVerif.Visible = false;
-            // 
-            // nudprix
-            // 
-            this.nudprix.Location = new System.Drawing.Point(137, 318);
-            this.nudprix.Name = "nudprix";
-            this.nudprix.Size = new System.Drawing.Size(217, 22);
-            this.nudprix.TabIndex = 13;
             // 
             // nudQuantite
             // 
@@ -167,17 +161,42 @@ namespace ppelourd
             this.txtMots.Size = new System.Drawing.Size(216, 22);
             this.txtMots.TabIndex = 17;
             // 
-            // insertSalon
+            // txtPrix
+            // 
+            this.txtPrix.Location = new System.Drawing.Point(135, 325);
+            this.txtPrix.Name = "txtPrix";
+            this.txtPrix.Size = new System.Drawing.Size(217, 22);
+            this.txtPrix.TabIndex = 18;
+            // 
+            // cbCategorie
+            // 
+            this.cbCategorie.FormattingEnabled = true;
+            this.cbCategorie.Location = new System.Drawing.Point(135, 375);
+            this.cbCategorie.Name = "cbCategorie";
+            this.cbCategorie.Size = new System.Drawing.Size(219, 24);
+            this.cbCategorie.TabIndex = 19;
+            // 
+            // cbImage
+            // 
+            this.cbImage.FormattingEnabled = true;
+            this.cbImage.Location = new System.Drawing.Point(135, 425);
+            this.cbImage.Name = "cbImage";
+            this.cbImage.Size = new System.Drawing.Size(219, 24);
+            this.cbImage.TabIndex = 20;
+            // 
+            // InsertProduit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(477, 511);
+            this.ClientSize = new System.Drawing.Size(474, 607);
+            this.Controls.Add(this.cbImage);
+            this.Controls.Add(this.cbCategorie);
+            this.Controls.Add(this.txtPrix);
             this.Controls.Add(this.txtMots);
             this.Controls.Add(this.txtdesc);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.nudQuantite);
-            this.Controls.Add(this.nudprix);
             this.Controls.Add(this.labelVerif);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.btnClear);
@@ -187,9 +206,9 @@ namespace ppelourd
             this.Controls.Add(this.txtLibelle);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "insertSalon";
+            this.Name = "InsertProduit";
             this.Text = "Formulaire de création de salon";
-            ((System.ComponentModel.ISupportInitialize)(this.nudprix)).EndInit();
+            this.Load += new System.EventHandler(this.InsertProduit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantite)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -207,10 +226,12 @@ namespace ppelourd
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label labelVerif;
-        private System.Windows.Forms.NumericUpDown nudprix;
         private System.Windows.Forms.NumericUpDown nudQuantite;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtdesc;
         private System.Windows.Forms.TextBox txtMots;
+        private System.Windows.Forms.TextBox txtPrix;
+        private System.Windows.Forms.ComboBox cbCategorie;
+        private System.Windows.Forms.ComboBox cbImage;
     }
 }

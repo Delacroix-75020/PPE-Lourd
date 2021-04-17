@@ -21,97 +21,28 @@ namespace ppelourd
 
         List<Produit> lesproduits = new List<Produit>();
         List<Client> lesclients = new List<Client>();
-        List<User> lesusers = new List<User>();
+        List<User> lesadmins = new List<User>();
+        List<Journal> lesjournaux = new List<Journal>();
+
         MySqlConnection conn = null;
 
-       /* private Salon querySalon(int id_salon)
+        private void load_admin()
         {
-            MySqlConnection conn1 = DataBaseInfo.openConnection();
-            string sql = "SELECT * FROM salon WHERE id = " + id_salon;
-            MySqlCommand cmd = new MySqlCommand(sql, conn1);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            Salon salon = null;
-            while (rdr.Read())
-            {
-               salon = new Salon(int.Parse(rdr[0].ToString()), rdr[1].ToString(), DateTime.Parse(rdr[2].ToString()), DateTime.Parse(rdr[3].ToString()), rdr[4].ToString());
-
-            }
-            rdr.Close();
-            conn1.Close();
-            return salon;
-        }*/
-
-       /* private List<Salon> querySalons(int idparticipant)
-        {
-            List<Salon> lessalons = new List<Salon>(); 
-            string sql = "SELECT id_salon FROM participer WHERE id_participant = " + idparticipant;
+            lesadmins.Clear();
+            string sql = "Select * from admin";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                int id_salon = int.Parse(rdr[0].ToString());
-                Salon s = querySalon(id_salon);
-                if (s != null)
-                {
-                    lessalons.Add(s);
-                }
+                int roleid = int.Parse(rdr[4].ToString());
+                User.RoleType role = User.intToRoleType(roleid);
+                User AdminViews = new User(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), role);
+                lesadmins.Add(AdminViews);
             }
             rdr.Close();
-            return lessalons;
-        }*/
-        /*private void updateParticipantSalon()
-        {
-            foreach (Participant p in lesparticipants)
-            {
-                List<Salon> lessalons = querySalons(p.Id);
-                p.setSalons(lessalons);
-            }
-        }*/
-
-       /* private Participant queryParticipant(int id_participant)
-        {
-            MySqlConnection conn1 = DataBaseInfo.openConnection();
-            string sql = "SELECT * FROM participant WHERE id = " + id_participant;
-            MySqlCommand cmd = new MySqlCommand(sql, conn1);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            Participant participant = null;
-            while (rdr.Read())
-            {
-                participant = new Participant(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString());
-
-            }
-            rdr.Close();
-            conn1.Close();
-            return participant;
-        }*/
-
-        /*private List<Participant> queryParticipants(int idsalon)
-        {
-            List<Participant> lesParticipants = new List<Participant>();
-            string sql = "SELECT id_participant FROM participer WHERE id_salon = " + idsalon;
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                int id_participant = int.Parse(rdr[0].ToString());
-                Participant p = queryParticipant(id_participant);
-                if (p != null)
-                {
-                    lesParticipants.Add(p);
-                }
-            }
-            rdr.Close();
-            return lesParticipants;
-        }*/
-
-        /*private void updateSalonParticipant()
-        {
-            foreach (Salon s in lessalon)
-            {
-                List<Participant> lesparticipants = queryParticipants(s.Id);
-                s.setParticipants(lesparticipants);
-            }
-        }*/
+            DGVAdmin.DataSource = null;
+            DGVAdmin.DataSource = lesadmins;
+        }
         private void load_client()
         {
             lesclients.Clear();
@@ -132,12 +63,12 @@ namespace ppelourd
         private void load_produit()
         {
             lesproduits.Clear();
-            string sql = "Select id_produit, nom_produit, p_motscles, description, qteProduit, prix from produit ";
+            string sql = "SELECT produit.*, categorie.nom_categorie from produit, categorie WHERE produit.id_categorie = categorie.id_categorie";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                Produit ProduitView = new Produit(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), int.Parse(rdr[4].ToString()), float.Parse(rdr[5].ToString()));
+                Produit ProduitView = new Produit(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), int.Parse(rdr[4].ToString()), float.Parse(rdr[5].ToString()), rdr[8].ToString());
                 lesproduits.Add(ProduitView);
             }
             rdr.Close();
@@ -146,15 +77,36 @@ namespace ppelourd
             DGVSalon.DataSource = lesproduits;
         }
 
-        private void load_admin()
+        private void load_journal()
         {
+            lesjournaux.Clear();
+            string sql = "SELECT username, dateconnect, role from journal, admin WHERE journal.PersonID = admin.id";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                DateTime dt = DateTime.Parse(rdr[1].ToString());
+                int r = int.Parse(rdr[2].ToString());
+                Journal JournalView = new Journal(dt, rdr[0].ToString(),User.intToRoleType(r));
+                lesjournaux.Add(JournalView);
+            }
+            rdr.Close();
+            DGVJournal.DataSource = null;
+            DGVJournal.DataSource = lesjournaux;
         }
+
+
+
+
+
 
         private void admin_Load(object sender, EventArgs e)
         {
             conn = DataBaseInfo.openConnection();
             load_client();
             load_produit();
+            load_admin();
+            load_journal();
             
         }
 
@@ -175,7 +127,7 @@ namespace ppelourd
             }
             foreach (Client p in selected)
             {
-                string sql = "DELETE FROM participant WHERE email = '" + p.Email + "'";
+                string sql = "DELETE FROM users WHERE id = '" + p.Id + "'";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }
@@ -185,8 +137,6 @@ namespace ppelourd
 
         private void btnAddParticipant_Click(object sender, EventArgs e)
         {
-            inscriptionClient inscription = new inscriptionClient();
-            inscription.Show();
         }
 
         private void btnUpdateSalon_Click(object sender, EventArgs e)
@@ -198,7 +148,8 @@ namespace ppelourd
         private void btnAddSalon_Click(object sender, EventArgs e)
         {
             InsertProduit insertionProduit = new InsertProduit();
-            insertionProduit.Show();
+            insertionProduit.ShowDialog();
+            load_produit();
         }
 
         private void btnDeleteSalon_Click(object sender, EventArgs e)
@@ -222,6 +173,7 @@ namespace ppelourd
         {
             insertAdmin insertionOperator = new insertAdmin();
             insertionOperator.ShowDialog();
+            load_admin();
         }
 
         private void DGVParticipant_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -277,6 +229,119 @@ namespace ppelourd
 
         private void DGVSalon_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            /*if (0 <= e.RowIndex && e.RowIndex < lesadmins.Count)
+            {
+                Produit produit = lesproduits[e.RowIndex];
+                string modifiedColumn = null;
+                if (e.ColumnIndex == 1)
+                {
+                    modifiedColumn = "nom_produit";
+                    produit.Nom = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                else if (e.ColumnIndex == 2)
+                {
+                    modifiedColumn = "p_motscles";
+                    produit.Most_Cles = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                else if (e.ColumnIndex == 3)
+                {
+                    modifiedColumn = "description";
+                    produit.Description = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                else if (e.ColumnIndex == 4)
+                {
+                    modifiedColumn = "email";
+                    produit.Email = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                if (modifiedColumn != null)
+                {
+                    MySqlConnection conn = DataBaseInfo.openConnection();
+                    string sql = $"UPDATE produit SET {modifiedColumn} = '{DGVClient.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()}' WHERE id = {client.Id} ";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Failed to Update User");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+
+                }
+
+            }*/
+
+        }
+
+        private void btndeleteAdmin_Click(object sender, EventArgs e)
+        {
+            List<User> selected = new List<User>();
+            foreach (DataGridViewRow row in DGVAdmin.SelectedRows)
+            {
+                selected.Add(lesadmins[row.Index]);
+                //DGVParticipant.Rows.RemoveAt(row.Index);
+            }
+            foreach (User s in selected)
+            {
+                string sql = "DELETE FROM admin WHERE id = " + s.Id;
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            load_admin();
+
+        }
+
+        private void DGVAdmin_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            /*if (0 <= e.RowIndex && e.RowIndex < lesadmins.Count)
+            {
+                User admin = lesadmins[e.RowIndex];
+                string modifiedColumn = null;
+                if (e.ColumnIndex == 1)
+                {
+                    modifiedColumn = "username";
+                    admin.Nom = DGVAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                else if (e.ColumnIndex == 2)
+                {
+                    modifiedColumn = "email";
+                    admin.Email = DGVAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                else if (e.ColumnIndex == 3)
+                {
+                    modifiedColumn = "adresse";
+                    admin.Adresse = DGVAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                else if (e.ColumnIndex == 4)
+                {
+                    modifiedColumn = "email";
+                    admin.Email = DGVAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                if (modifiedColumn != null)
+                {
+                    MySqlConnection conn = DataBaseInfo.openConnection();
+                    string sql = $"UPDATE admin SET {modifiedColumn} = '{DGVClient.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()}' WHERE id = {client.Id} ";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Failed to Update User");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+
+                }
+
+            }*/
 
         }
     }

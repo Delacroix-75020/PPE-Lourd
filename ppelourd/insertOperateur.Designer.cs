@@ -37,12 +37,14 @@ namespace ppelourd
             this.cbrole = new System.Windows.Forms.ComboBox();
             this.btnsubmit = new System.Windows.Forms.Button();
             this.btncancel = new System.Windows.Forms.Button();
+            this.txtemail = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 44);
+            this.label1.Location = new System.Drawing.Point(12, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 17);
             this.label1.TabIndex = 0;
@@ -50,14 +52,14 @@ namespace ppelourd
             // 
             // txtusername
             // 
-            this.txtusername.Location = new System.Drawing.Point(144, 45);
+            this.txtusername.Location = new System.Drawing.Point(121, 57);
             this.txtusername.Name = "txtusername";
             this.txtusername.Size = new System.Drawing.Size(183, 22);
             this.txtusername.TabIndex = 1;
             // 
             // txtpass
             // 
-            this.txtpass.Location = new System.Drawing.Point(144, 92);
+            this.txtpass.Location = new System.Drawing.Point(121, 159);
             this.txtpass.Name = "txtpass";
             this.txtpass.Size = new System.Drawing.Size(183, 22);
             this.txtpass.TabIndex = 3;
@@ -66,7 +68,7 @@ namespace ppelourd
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 91);
+            this.label2.Location = new System.Drawing.Point(12, 158);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 2;
@@ -75,7 +77,7 @@ namespace ppelourd
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 144);
+            this.label3.Location = new System.Drawing.Point(12, 213);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 17);
             this.label3.TabIndex = 4;
@@ -84,14 +86,14 @@ namespace ppelourd
             // cbrole
             // 
             this.cbrole.FormattingEnabled = true;
-            this.cbrole.Location = new System.Drawing.Point(144, 144);
+            this.cbrole.Location = new System.Drawing.Point(121, 213);
             this.cbrole.Name = "cbrole";
             this.cbrole.Size = new System.Drawing.Size(183, 24);
             this.cbrole.TabIndex = 5;
             // 
             // btnsubmit
             // 
-            this.btnsubmit.Location = new System.Drawing.Point(276, 235);
+            this.btnsubmit.Location = new System.Drawing.Point(287, 306);
             this.btnsubmit.Name = "btnsubmit";
             this.btnsubmit.Size = new System.Drawing.Size(105, 40);
             this.btnsubmit.TabIndex = 6;
@@ -101,7 +103,7 @@ namespace ppelourd
             // 
             // btncancel
             // 
-            this.btncancel.Location = new System.Drawing.Point(57, 235);
+            this.btncancel.Location = new System.Drawing.Point(42, 306);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(105, 40);
             this.btncancel.TabIndex = 7;
@@ -109,12 +111,30 @@ namespace ppelourd
             this.btncancel.UseVisualStyleBackColor = true;
             this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
             // 
+            // txtemail
+            // 
+            this.txtemail.Location = new System.Drawing.Point(122, 108);
+            this.txtemail.Name = "txtemail";
+            this.txtemail.Size = new System.Drawing.Size(182, 22);
+            this.txtemail.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 108);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(42, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Email";
+            // 
             // insertAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(422, 308);
+            this.ClientSize = new System.Drawing.Size(422, 376);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtemail);
             this.Controls.Add(this.btncancel);
             this.Controls.Add(this.btnsubmit);
             this.Controls.Add(this.cbrole);
@@ -124,7 +144,7 @@ namespace ppelourd
             this.Controls.Add(this.txtusername);
             this.Controls.Add(this.label1);
             this.Name = "insertAdmin";
-            this.Text = "Insert User";
+            this.Text = "Insert Admin";
             this.Load += new System.EventHandler(this.insertOperateur_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -141,5 +161,7 @@ namespace ppelourd
         private System.Windows.Forms.ComboBox cbrole;
         private System.Windows.Forms.Button btnsubmit;
         private System.Windows.Forms.Button btncancel;
+        private System.Windows.Forms.TextBox txtemail;
+        private System.Windows.Forms.Label label4;
     }
 }

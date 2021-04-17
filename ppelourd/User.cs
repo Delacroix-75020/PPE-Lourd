@@ -8,6 +8,18 @@ namespace ppelourd
 {
     class User
     {
+        private int id;
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
         public enum RoleType
         {
             EMPLOYE,
@@ -21,6 +33,10 @@ namespace ppelourd
             {
                 return username;
             }
+            set
+            {
+                username = value;
+            }
         }
 
         private string email;
@@ -30,6 +46,10 @@ namespace ppelourd
             {
                 return email;
             }
+            set
+            {
+                email = value;
+            }
         }
 
         private string password;
@@ -38,6 +58,10 @@ namespace ppelourd
             get
             {
                 return password;
+            }
+            set
+            {
+                password = value;
             }
         }
         private RoleType role;
@@ -49,8 +73,9 @@ namespace ppelourd
             }
         }
 
-        public User (string username, string email, string password, RoleType role)
+        public User (int id, string username, string email,string password,  RoleType role)
         {
+            this.id = id;
             this.username = username;
             this.email = email;
             this.password = password;

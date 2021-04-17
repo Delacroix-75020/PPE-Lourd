@@ -98,7 +98,10 @@
     <Compile Include="admin.Designer.cs">
       <DependentUpon>admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Buy.cs" />
+    <Compile Include="Categorie.cs" />
     <Compile Include="DataBaseInfo.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="inscriptionClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +120,7 @@
     <Compile Include="InsertProduit.Designer.cs">
       <DependentUpon>InsertProduit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Journal.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>

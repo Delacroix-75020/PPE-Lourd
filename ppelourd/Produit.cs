@@ -59,12 +59,21 @@ namespace ppelourd
             }
         }
 
+        private string categorie;
+        public string Categorie
+        {
+            get
+            {
+                return categorie;
+            }
+        }
+
         public Produit()
         {
 
         }
 
-        public Produit(int id, string nom, string mots_cles, string description, int quantite, float prix)
+        public Produit(int id, string nom, string mots_cles, string description, int quantite, float prix, string categorie)
         {
             this.id = id;
             this.nom = nom;
@@ -72,6 +81,7 @@ namespace ppelourd
             this.description = description;
             this.quantite = quantite;
             this.prix = prix;
+            this.categorie = categorie; 
         }
     }
 }

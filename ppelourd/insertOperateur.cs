@@ -28,6 +28,7 @@ namespace ppelourd
         private void btnsubmit_Click(object sender, EventArgs e)
         {
             string username = txtusername.Text;
+            string email = txtemail.Text;
             string password = SHA.petitsha(txtpass.Text);
             User.RoleType role = User.RoleType.EMPLOYE;
             if(cbrole.Text == "Employe")
@@ -39,7 +40,7 @@ namespace ppelourd
                 role = User.RoleType.ADMIN;
             }
             MySqlConnection conn = DataBaseInfo.openConnection();
-            string sql = $"insert into users (username, pass, Role) Values ('{username}', '{password}', {User.roleTypeToInt(role)})";
+            string sql = $"insert into admin (username,email ,pass, Role) Values ('{username}', '{email}','{password}', {User.roleTypeToInt(role)})";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             try
             {

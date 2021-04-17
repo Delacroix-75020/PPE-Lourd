@@ -33,17 +33,15 @@ namespace ppelourd
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabParticipant = new System.Windows.Forms.TabPage();
             this.btnDeleteParticipant = new System.Windows.Forms.Button();
-            this.btnUpdateParticipant = new System.Windows.Forms.Button();
-            this.btnAddParticipant = new System.Windows.Forms.Button();
             this.DGVClient = new System.Windows.Forms.DataGridView();
             this.tabSalon = new System.Windows.Forms.TabPage();
             this.btnDeleteSalon = new System.Windows.Forms.Button();
-            this.btnUpdateSalon = new System.Windows.Forms.Button();
             this.btnAddSalon = new System.Windows.Forms.Button();
             this.DGVSalon = new System.Windows.Forms.DataGridView();
             this.tabConnexion = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.DGVJournal = new System.Windows.Forms.DataGridView();
             this.tabUser = new System.Windows.Forms.TabPage();
+            this.btndeleteAdmin = new System.Windows.Forms.Button();
             this.DGVAdmin = new System.Windows.Forms.DataGridView();
             this.insertoperator = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
@@ -52,7 +50,7 @@ namespace ppelourd
             this.tabSalon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVSalon)).BeginInit();
             this.tabConnexion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVJournal)).BeginInit();
             this.tabUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVAdmin)).BeginInit();
             this.SuspendLayout();
@@ -82,8 +80,6 @@ namespace ppelourd
             // tabParticipant
             // 
             this.tabParticipant.Controls.Add(this.btnDeleteParticipant);
-            this.tabParticipant.Controls.Add(this.btnUpdateParticipant);
-            this.tabParticipant.Controls.Add(this.btnAddParticipant);
             this.tabParticipant.Controls.Add(this.DGVClient);
             this.tabParticipant.Location = new System.Drawing.Point(4, 25);
             this.tabParticipant.Name = "tabParticipant";
@@ -95,33 +91,13 @@ namespace ppelourd
             // 
             // btnDeleteParticipant
             // 
-            this.btnDeleteParticipant.Location = new System.Drawing.Point(148, 434);
+            this.btnDeleteParticipant.Location = new System.Drawing.Point(15, 434);
             this.btnDeleteParticipant.Name = "btnDeleteParticipant";
             this.btnDeleteParticipant.Size = new System.Drawing.Size(101, 42);
             this.btnDeleteParticipant.TabIndex = 3;
-            this.btnDeleteParticipant.Text = "Supprimer Participant";
+            this.btnDeleteParticipant.Text = "Supprimer Client";
             this.btnDeleteParticipant.UseVisualStyleBackColor = true;
             this.btnDeleteParticipant.Click += new System.EventHandler(this.btnDeleteParticipant_Click);
-            // 
-            // btnUpdateParticipant
-            // 
-            this.btnUpdateParticipant.Location = new System.Drawing.Point(276, 434);
-            this.btnUpdateParticipant.Name = "btnUpdateParticipant";
-            this.btnUpdateParticipant.Size = new System.Drawing.Size(101, 42);
-            this.btnUpdateParticipant.TabIndex = 2;
-            this.btnUpdateParticipant.Text = "Modifier Participant";
-            this.btnUpdateParticipant.UseVisualStyleBackColor = true;
-            this.btnUpdateParticipant.Click += new System.EventHandler(this.btnUpdateParticipant_Click);
-            // 
-            // btnAddParticipant
-            // 
-            this.btnAddParticipant.Location = new System.Drawing.Point(20, 436);
-            this.btnAddParticipant.Name = "btnAddParticipant";
-            this.btnAddParticipant.Size = new System.Drawing.Size(101, 42);
-            this.btnAddParticipant.TabIndex = 1;
-            this.btnAddParticipant.Text = "Ajouter Participant";
-            this.btnAddParticipant.UseVisualStyleBackColor = true;
-            this.btnAddParticipant.Click += new System.EventHandler(this.btnAddParticipant_Click);
             // 
             // DGVClient
             // 
@@ -138,7 +114,6 @@ namespace ppelourd
             // tabSalon
             // 
             this.tabSalon.Controls.Add(this.btnDeleteSalon);
-            this.tabSalon.Controls.Add(this.btnUpdateSalon);
             this.tabSalon.Controls.Add(this.btnAddSalon);
             this.tabSalon.Controls.Add(this.DGVSalon);
             this.tabSalon.Location = new System.Drawing.Point(4, 25);
@@ -151,23 +126,13 @@ namespace ppelourd
             // 
             // btnDeleteSalon
             // 
-            this.btnDeleteSalon.Location = new System.Drawing.Point(313, 428);
+            this.btnDeleteSalon.Location = new System.Drawing.Point(134, 428);
             this.btnDeleteSalon.Name = "btnDeleteSalon";
             this.btnDeleteSalon.Size = new System.Drawing.Size(90, 51);
             this.btnDeleteSalon.TabIndex = 3;
-            this.btnDeleteSalon.Text = "Supprmier Salon";
+            this.btnDeleteSalon.Text = "Supprmier Produit";
             this.btnDeleteSalon.UseVisualStyleBackColor = true;
             this.btnDeleteSalon.Click += new System.EventHandler(this.btnDeleteSalon_Click);
-            // 
-            // btnUpdateSalon
-            // 
-            this.btnUpdateSalon.Location = new System.Drawing.Point(159, 427);
-            this.btnUpdateSalon.Name = "btnUpdateSalon";
-            this.btnUpdateSalon.Size = new System.Drawing.Size(90, 51);
-            this.btnUpdateSalon.TabIndex = 2;
-            this.btnUpdateSalon.Text = "Modifier Salon";
-            this.btnUpdateSalon.UseVisualStyleBackColor = true;
-            this.btnUpdateSalon.Click += new System.EventHandler(this.btnUpdateSalon_Click);
             // 
             // btnAddSalon
             // 
@@ -175,7 +140,7 @@ namespace ppelourd
             this.btnAddSalon.Name = "btnAddSalon";
             this.btnAddSalon.Size = new System.Drawing.Size(90, 51);
             this.btnAddSalon.TabIndex = 1;
-            this.btnAddSalon.Text = "Ajouter Salon";
+            this.btnAddSalon.Text = "Ajouter Produit";
             this.btnAddSalon.UseVisualStyleBackColor = true;
             this.btnAddSalon.Click += new System.EventHandler(this.btnAddSalon_Click);
             // 
@@ -192,7 +157,7 @@ namespace ppelourd
             // 
             // tabConnexion
             // 
-            this.tabConnexion.Controls.Add(this.dataGridView2);
+            this.tabConnexion.Controls.Add(this.DGVJournal);
             this.tabConnexion.Location = new System.Drawing.Point(4, 25);
             this.tabConnexion.Name = "tabConnexion";
             this.tabConnexion.Size = new System.Drawing.Size(1004, 490);
@@ -200,18 +165,19 @@ namespace ppelourd
             this.tabConnexion.Text = "Journal de connexion";
             this.tabConnexion.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // DGVJournal
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(-4, 1);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(1012, 508);
-            this.dataGridView2.TabIndex = 0;
+            this.DGVJournal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVJournal.Location = new System.Drawing.Point(-4, 1);
+            this.DGVJournal.Name = "DGVJournal";
+            this.DGVJournal.RowHeadersWidth = 51;
+            this.DGVJournal.RowTemplate.Height = 24;
+            this.DGVJournal.Size = new System.Drawing.Size(1012, 508);
+            this.DGVJournal.TabIndex = 0;
             // 
             // tabUser
             // 
+            this.tabUser.Controls.Add(this.btndeleteAdmin);
             this.tabUser.Controls.Add(this.DGVAdmin);
             this.tabUser.Controls.Add(this.insertoperator);
             this.tabUser.Location = new System.Drawing.Point(4, 25);
@@ -222,21 +188,32 @@ namespace ppelourd
             this.tabUser.Text = "Employés/Admin";
             this.tabUser.UseVisualStyleBackColor = true;
             // 
+            // btndeleteAdmin
+            // 
+            this.btndeleteAdmin.Location = new System.Drawing.Point(138, 435);
+            this.btndeleteAdmin.Name = "btndeleteAdmin";
+            this.btndeleteAdmin.Size = new System.Drawing.Size(89, 49);
+            this.btndeleteAdmin.TabIndex = 4;
+            this.btndeleteAdmin.Text = "Supprimer Operateur";
+            this.btndeleteAdmin.UseVisualStyleBackColor = true;
+            this.btndeleteAdmin.Click += new System.EventHandler(this.btndeleteAdmin_Click);
+            // 
             // DGVAdmin
             // 
             this.DGVAdmin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVAdmin.Location = new System.Drawing.Point(6, 6);
+            this.DGVAdmin.Location = new System.Drawing.Point(0, 6);
             this.DGVAdmin.Name = "DGVAdmin";
             this.DGVAdmin.RowHeadersWidth = 51;
             this.DGVAdmin.RowTemplate.Height = 24;
-            this.DGVAdmin.Size = new System.Drawing.Size(992, 411);
+            this.DGVAdmin.Size = new System.Drawing.Size(998, 411);
             this.DGVAdmin.TabIndex = 3;
+            this.DGVAdmin.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVAdmin_CellEndEdit);
             // 
             // insertoperator
             // 
-            this.insertoperator.Location = new System.Drawing.Point(17, 435);
+            this.insertoperator.Location = new System.Drawing.Point(24, 435);
             this.insertoperator.Name = "insertoperator";
-            this.insertoperator.Size = new System.Drawing.Size(89, 42);
+            this.insertoperator.Size = new System.Drawing.Size(89, 49);
             this.insertoperator.TabIndex = 2;
             this.insertoperator.Text = "Insertion d\'operateur";
             this.insertoperator.UseVisualStyleBackColor = true;
@@ -260,7 +237,7 @@ namespace ppelourd
             this.tabSalon.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVSalon)).EndInit();
             this.tabConnexion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVJournal)).EndInit();
             this.tabUser.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVAdmin)).EndInit();
             this.ResumeLayout(false);
@@ -276,16 +253,14 @@ namespace ppelourd
         private System.Windows.Forms.TabPage tabSalon;
         private System.Windows.Forms.TabPage tabConnexion;
         private System.Windows.Forms.Button btnDeleteParticipant;
-        private System.Windows.Forms.Button btnUpdateParticipant;
-        private System.Windows.Forms.Button btnAddParticipant;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView DGVJournal;
         private System.Windows.Forms.DataGridView DGVSalon;
         private System.Windows.Forms.Button btnDeleteSalon;
-        private System.Windows.Forms.Button btnUpdateSalon;
         private System.Windows.Forms.Button btnAddSalon;
         private System.Windows.Forms.DataGridView DGVClient;
         private System.Windows.Forms.TabPage tabUser;
         private System.Windows.Forms.DataGridView DGVAdmin;
         private System.Windows.Forms.Button insertoperator;
+        private System.Windows.Forms.Button btndeleteAdmin;
     }
 }

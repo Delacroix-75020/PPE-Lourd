@@ -21,6 +21,31 @@ namespace ppelourd
         {
             InitializeComponent();
         }
+        private void AjouterJournalConnexion(int id_admin, DateTime t)
+        {
+            MySqlConnection conn = null;
+            try
+            {
+                string dt = t.ToString("yyyy-MM-dd HH:mm:ss");
+                conn = DataBaseInfo.openConnection();
+                string sql = $"INSERT INTO journal (dateconnect, PersonID) VALUES ('{dt}', {id_admin})";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                int res = cmd.ExecuteNonQuery();
+
+            }
+            catch
+            {
+                MessageBox.Show("Erreur lors de l'insertion dans le journal");
+            }
+            finally
+            {
+               if(conn != null)
+                {
+                    conn.Close();
+                } 
+            }
+            
+        }
         string chainedeconnexion = "server=localhost;user id=root;database=ppe";
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -38,14 +63,16 @@ namespace ppelourd
                 
                 MySqlConnection conn = new MySqlConnection(chainedeconnexion);
                 conn.Open();
-                string sql = $"Select username, pass, Role from admin where username='{username}' and pass='{pass}'";
+                string sql = $"Select id, username, pass, Role from admin where username='{username}' and pass='{pass}'";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
                     labelError.Visible = false;
-                    role = int.Parse(rdr[2].ToString());
-                    nomoperateur = rdr[0].ToString();
+                    int id = int.Parse(rdr[0].ToString());
+                    role = int.Parse(rdr[3].ToString());
+                    nomoperateur = rdr[1].ToString();
+                    AjouterJournalConnexion(id, DateTime.Now);
                     this.DialogResult = DialogResult.OK;
 
                 }
