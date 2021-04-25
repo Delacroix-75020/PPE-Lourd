@@ -1,8 +1,10 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace ppelourd
 {
@@ -30,6 +32,54 @@ namespace ppelourd
         {
             this.id = id;
             this.nom = nom;
+        }
+
+        public static List<Categorie> getAllCategories()
+        {
+            List<Categorie> lescategories = new List<Categorie>();
+            MySqlConnection conn = DataBaseInfo.openConnection();
+            string sql = "SELECT * from categorie";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            try
+            {
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                lescategories = new List<Categorie>();
+                while (rdr.Read())
+                {
+                    int id = int.Parse(rdr[0].ToString());
+                    string nom = rdr[1].ToString();
+
+                    Categorie cat = new Categorie(id, nom);
+                    lescategories.Add(cat);
+                }
+                rdr.Close();
+                return lescategories;
+                
+
+            }
+            catch 
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public static int stringToId(string name)
+        {
+            name = name.Trim();
+            List<Categorie> lescategories = ppelourd.Categorie.getAllCategories();
+
+            foreach (ppelourd.Categorie cat in lescategories)
+            {
+                if (name.ToLower().Equals(cat.Nom.ToLower()))
+                {
+                    return cat.id;
+                }
+            }
+            return 0;
         }
 
     }

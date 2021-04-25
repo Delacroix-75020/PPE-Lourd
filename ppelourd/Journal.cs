@@ -35,11 +35,33 @@ namespace ppelourd
             }
         }
 
-        public Journal(DateTime date, string username, User.RoleType role)
+        private bool etat;
+        public string Etat
+        {
+            get
+            {
+                if (etat)
+                {
+                    return "Connexion réussi";
+                }
+                else
+                {
+                    return "Connexion echoué";
+                }
+            }
+        }
+
+        public Journal(DateTime date, string username, User.RoleType role, bool etat)
         {
             this.date = date;
             this.username = username;
             this.role = role;
+            this.etat = etat;
+        }
+
+        public static string dateTimeToSQLString(DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 

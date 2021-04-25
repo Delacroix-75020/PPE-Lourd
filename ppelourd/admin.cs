@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,7 +73,6 @@ namespace ppelourd
                 lesproduits.Add(ProduitView);
             }
             rdr.Close();
-            //updateSalonParticipant();
             DGVSalon.DataSource = null;
             DGVSalon.DataSource = lesproduits;
         }
@@ -80,14 +80,17 @@ namespace ppelourd
         private void load_journal()
         {
             lesjournaux.Clear();
-            string sql = "SELECT username, dateconnect, role from journal, admin WHERE journal.PersonID = admin.id";
+            DateTime dt = DateTime.Now.Subtract(new TimeSpan(3,0,0,0,0));
+            string strdate = Journal.dateTimeToSQLString(dt);
+            string sql = $"SELECT username, dateconnect, role, etat from journal, admin WHERE journal.PersonID = admin.id AND dateconnect > '{strdate}' ORDER BY dateconnect DESC";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                DateTime dt = DateTime.Parse(rdr[1].ToString());
+                dt = DateTime.Parse(rdr[1].ToString());
                 int r = int.Parse(rdr[2].ToString());
-                Journal JournalView = new Journal(dt, rdr[0].ToString(),User.intToRoleType(r));
+                bool etat = Boolean.Parse(rdr[3].ToString());
+                Journal JournalView = new Journal(dt, rdr[0].ToString(),User.intToRoleType(r), etat);
                 lesjournaux.Add(JournalView);
             }
             rdr.Close();
@@ -229,34 +232,71 @@ namespace ppelourd
 
         private void DGVSalon_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            /*if (0 <= e.RowIndex && e.RowIndex < lesadmins.Count)
+            if (0 <= e.RowIndex && e.RowIndex < lesproduits.Count)
             {
+                float prix = -1;
                 Produit produit = lesproduits[e.RowIndex];
+                string strvalue = null;
+                int intvalue = 0;
                 string modifiedColumn = null;
                 if (e.ColumnIndex == 1)
                 {
                     modifiedColumn = "nom_produit";
-                    produit.Nom = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    strvalue = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 else if (e.ColumnIndex == 2)
                 {
                     modifiedColumn = "p_motscles";
-                    produit.Most_Cles = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    strvalue = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 else if (e.ColumnIndex == 3)
                 {
                     modifiedColumn = "description";
-                    produit.Description = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    strvalue = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 else if (e.ColumnIndex == 4)
                 {
-                    modifiedColumn = "email";
-                    produit.Email = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    modifiedColumn = "qteProduit";
+                    intvalue = int.Parse(DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
                 }
+                else if (e.ColumnIndex == 5)
+                {
+                    
+                    modifiedColumn = "prix";
+                    prix = float.Parse(DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                    
+                }
+                else if (e.ColumnIndex == 6)
+                {
+                    modifiedColumn = "id_categorie";
+                    string tmp = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    intvalue = Categorie.stringToId(tmp);
+                    if (intvalue == 0)
+                    {
+                        MessageBox.Show("Catégorie introuvable");
+                        return;
+                    }
+                }
+
                 if (modifiedColumn != null)
                 {
                     MySqlConnection conn = DataBaseInfo.openConnection();
-                    string sql = $"UPDATE produit SET {modifiedColumn} = '{DGVClient.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()}' WHERE id = {client.Id} ";
+                    string sql = null;
+                    if (strvalue != null)
+                    {
+                        sql = $"UPDATE produit SET {modifiedColumn} = '{strvalue}' WHERE id_produit = {produit.Id} ";
+                    }
+                    else if (prix >= 0)
+                    {
+                        NumberFormatInfo nfi = new NumberFormatInfo();
+                        nfi.NumberDecimalSeparator = ".";
+                        string strprix = prix.ToString(nfi);
+                        sql = $"UPDATE produit SET {modifiedColumn} = {strprix} WHERE id_produit = {produit.Id} ";
+                    }
+                    else
+                    {
+                        sql = $"UPDATE produit SET {modifiedColumn} = {intvalue} WHERE id_produit = {produit.Id} ";
+                    }
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     try
                     {
@@ -273,7 +313,7 @@ namespace ppelourd
 
                 }
 
-            }*/
+            }
 
         }
 

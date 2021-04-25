@@ -35,10 +35,10 @@ namespace ppelourd
                 string Libelle = txtLibelle.Text;
                 string MotsCles = txtMots.Text;
                 string Description = txtdesc.Text;
-                decimal Quantite = nudQuantite.Value;
+                decimal Quantite = nudQuantite.Value;    
+                float Prix = float.Parse(txtPrix.Text);
                 NumberFormatInfo nfi = new NumberFormatInfo();
                 nfi.NumberDecimalSeparator = ".";
-                float Prix = float.Parse(txtPrix.Text);
                 string strprix = Prix.ToString(nfi);
                 int idcategorie = (cbCategorie.SelectedItem as Categorie).Id;
                 int idimage = (cbImage.SelectedItem as Image).Id;
@@ -78,39 +78,16 @@ namespace ppelourd
 
         private void InsertProduit_Load(object sender, EventArgs e)
         {
+            lescategories = Categorie.getAllCategories();
+
+            cbCategorie.DataSource = lescategories;
+            cbCategorie.DisplayMember = "Nom";
+            cbCategorie.ValueMember = "Id";
+
+
             MySqlConnection conn = DataBaseInfo.openConnection();
-            string sql = "SELECT * from categorie";
+            string sql = "SELECT * from image";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
-            try
-            {
-                MySqlDataReader rdr = cmd.ExecuteReader();
-                lescategories = new List<Categorie>();
-                while (rdr.Read())
-                {
-                    int id = int.Parse(rdr[0].ToString());
-                    string nom = rdr[1].ToString();
-
-                    Categorie cat = new Categorie(id, nom);
-                    lescategories.Add(cat);
-                }
-                rdr.Close();
-                cbCategorie.DataSource = lescategories;
-                cbCategorie.DisplayMember = "Nom";
-                cbCategorie.ValueMember = "Id";
-
-            }
-            catch
-            {
-                MessageBox.Show("Erreur de chargement de la liste des categories");
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            conn = DataBaseInfo.openConnection();
-            sql = "SELECT * from image";
-            cmd = new MySqlCommand(sql, conn);
             try
             {
                 MySqlDataReader rdr = cmd.ExecuteReader();

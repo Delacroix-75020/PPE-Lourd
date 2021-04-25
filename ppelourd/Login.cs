@@ -21,14 +21,14 @@ namespace ppelourd
         {
             InitializeComponent();
         }
-        private void AjouterJournalConnexion(int id_admin, DateTime t)
+        private void AjouterJournalConnexion(int id_admin, DateTime t, bool etat)
         {
             MySqlConnection conn = null;
             try
             {
                 string dt = t.ToString("yyyy-MM-dd HH:mm:ss");
                 conn = DataBaseInfo.openConnection();
-                string sql = $"INSERT INTO journal (dateconnect, PersonID) VALUES ('{dt}', {id_admin})";
+                string sql = $"INSERT INTO journal (dateconnect,etat , PersonID) VALUES ('{dt}', {etat}, {id_admin})";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 int res = cmd.ExecuteNonQuery();
 
@@ -63,23 +63,32 @@ namespace ppelourd
                 
                 MySqlConnection conn = new MySqlConnection(chainedeconnexion);
                 conn.Open();
-                string sql = $"Select id, username, pass, Role from admin where username='{username}' and pass='{pass}'";
+                string sql = $"Select id, username, pass, Role from admin where username='{username}'";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
                     labelError.Visible = false;
                     int id = int.Parse(rdr[0].ToString());
+                    string password = rdr[2].ToString();
+                    bool etat = password.Equals(pass.ToLower());
                     role = int.Parse(rdr[3].ToString());
                     nomoperateur = rdr[1].ToString();
-                    AjouterJournalConnexion(id, DateTime.Now);
-                    this.DialogResult = DialogResult.OK;
+                    AjouterJournalConnexion(id, DateTime.Now, etat);
+                    if (etat)
+                    {
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        labelError.Visible = true;
+                    }
+                    
 
                 }
                 else
                 {
                     labelError.Visible = true;
-
                 }
             }
             catch

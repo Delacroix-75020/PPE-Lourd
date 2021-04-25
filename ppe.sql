@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 19 avr. 2021 à 18:27
+-- Généré le : dim. 25 avr. 2021 à 13:14
 -- Version du serveur :  10.4.18-MariaDB
 -- Version de PHP : 7.4.16
 
@@ -11,9 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-DROP DATABASE IF EXISTS ppe;
-CREATE DATABASE ppe;
-USE ppe;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,7 +22,9 @@ USE ppe;
 --
 
 -- --------------------------------------------------------
-
+DROP DATABASE IF EXISTS ppe;
+CREATE DATABASE ppe;
+USE ppe;
 --
 -- Structure de la table `admin`
 --
@@ -122,8 +121,21 @@ INSERT INTO `image` (`id_image`, `nom_image`) VALUES
 CREATE TABLE `journal` (
   `id` int(11) NOT NULL,
   `dateconnect` datetime DEFAULT NULL,
+  `etat` tinyint(1) NOT NULL,
   `PersonID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `journal`
+--
+
+INSERT INTO `journal` (`id`, `dateconnect`, `etat`, `PersonID`) VALUES
+(35, '2021-04-24 20:59:46', 1, 4),
+(36, '2021-04-24 21:03:53', 1, 1),
+(37, '2021-04-25 12:21:18', 1, 4),
+(38, '2021-04-25 12:21:53', 0, 4),
+(39, '2021-04-25 12:22:09', 0, 4),
+(40, '2021-04-25 12:22:15', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -174,7 +186,7 @@ INSERT INTO `produit` (`id_produit`, `nom_produit`, `p_motscles`, `description`,
 (2, 'Rétroviseur Renault ', '', 'Rétroviseur de la marque Renault avec une tes grande flexibilité ', 100, 39, 2, 2),
 (4, 'Volant GT sport +', 'volant, voiture, sport', 'Un volant en carbone de wish qui pèse environ 361 kg ce qui va te donner l\'impression de conduire un camtar', 200, 29, 1, 3),
 (6, 'downpipe Scania V8', 'scania, camion, downpipe, V8', 'Downpipe pour Scania V8 5ème génération, idéal pour une reprogrammation moteur', 0, 299.99, 4, 4),
-(7, 'jante pour bus', 'jante, bus,', 'jante en aluminium allégée', 0, 128.99, 3, 5);
+(7, 'jante pour bus ', 'jante, bus', 'jante en aluminium', 5, 45.5, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -289,7 +301,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT pour la table `journal`
 --
 ALTER TABLE `journal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT pour la table `produit`

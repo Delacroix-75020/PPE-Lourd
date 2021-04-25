@@ -24,6 +24,11 @@ namespace ppelourd
             {
                 return nom;
             }
+
+            set
+            {
+                nom = value;
+            }
         }
         private string mots_cles;
         public string Most_Cles
@@ -31,6 +36,11 @@ namespace ppelourd
             get
             {
                 return mots_cles;
+            }
+
+            set
+            {
+                mots_cles = value;
             }
         }
         private string description;
@@ -40,6 +50,11 @@ namespace ppelourd
             {
                 return description;
             }
+
+            set
+            {
+                description = value;
+            }
         }
         private int quantite;
         public int Quantite
@@ -47,6 +62,11 @@ namespace ppelourd
             get
             {
                 return quantite;
+            }
+
+            set
+            {
+                quantite = value;
             }
         }
 
@@ -57,6 +77,11 @@ namespace ppelourd
             {
                 return prix;
             }
+
+            set
+            {
+                prix = value;
+            }
         }
 
         private string categorie;
@@ -65,6 +90,21 @@ namespace ppelourd
             get
             {
                 return categorie;
+            }
+
+            set
+            {
+                string newcategorie = value.Trim();
+                List<Categorie> lescategories = ppelourd.Categorie.getAllCategories();
+
+                foreach (ppelourd.Categorie cat in lescategories)
+                {
+                    if (newcategorie.ToLower().Equals(cat.Nom.ToLower()))
+                    {
+                        categorie = cat.Nom;
+                        break;
+                    }
+                }
             }
         }
 
