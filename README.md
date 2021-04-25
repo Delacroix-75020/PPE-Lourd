@@ -1,6 +1,8 @@
 # PPE-Lourd
 Mon Client-lourd de mon ppe
+Inserer la base de donnée ppe qui se trouve au debut de l'arborescence 
 
+------------- Identifiants ----------------
 
 Administrateur (pour la partie admin)
 --------------
