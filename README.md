@@ -1,6 +1,6 @@
 # PPE-Lourd
-Mon Client-lourd de mon ppe
-Inserer la base de donnée ppe qui se trouve au debut de l'arborescence 
+<b>Mon Client-lourd de mon ppe</b>
+<b>Inserer la base de donnée ppe qui se trouve au debut de l'arborescence</b>
 
 ------------- Identifiants ----------------
 
