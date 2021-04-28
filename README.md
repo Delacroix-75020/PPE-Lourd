@@ -5,7 +5,7 @@
 # FILELEC
 
 # Connexion à la base de données
-N'oubliez pas de connecter la base de données villiers.sql si ce n'est pas déjà fait.
+N'oubliez pas de connecter la base de données ppe.sql si ce n'est pas déjà fait.
 
 ------------- Identifiants ----------------
 
