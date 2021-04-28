@@ -5,7 +5,7 @@
 # FILELEC
 
 # Connexion à la base de données
-N'oubliez pas de connecter la base de données ppe.sql si ce n'est pas déjà fait.
+N'oubliez pas de resourcer a nouveau la base de données ppe.sql avec celui se trouvant dans ce github car des modifs y ont été apporté.
 
 ------------- Identifiants ----------------
 
