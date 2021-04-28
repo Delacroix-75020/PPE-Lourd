@@ -1,6 +1,11 @@
 # PPE-Lourd
 <b>Mon Client-lourd de mon ppe</b>
-<b>Inserer la base de donnée ppe qui se trouve au debut de l'arborescence</b>
+
+
+# FILELEC
+
+# Connexion à la base de données
+N'oubliez pas de connecter la base de données villiers.sql si ce n'est pas déjà fait.
 
 ------------- Identifiants ----------------
 

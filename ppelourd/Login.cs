@@ -15,6 +15,7 @@ namespace ppelourd
     {
         public int role = 0;
         public string nomoperateur;
+        Dictionary<string, int> dictUserConnexion = new Dictionary<string, int>();
 
         public string StrLevel = "Inconnu";
         public Login()
@@ -60,7 +61,13 @@ namespace ppelourd
                 string pass = txtpassword.Text;
                 pass = SHA.petitsha(pass);
 
-                
+                if (User.checkUserLocked(username))
+                {
+                    MessageBox.Show("Votre compte a été verouillé suite à 5 tentatives échouées");
+                    this.DialogResult = DialogResult.Cancel;
+                    return ;
+                }
+
                 MySqlConnection conn = new MySqlConnection(chainedeconnexion);
                 conn.Open();
                 string sql = $"Select id, username, pass, Role from admin where username='{username}'";
@@ -81,6 +88,20 @@ namespace ppelourd
                     }
                     else
                     {
+                        int nbr = -1;
+                        if(!dictUserConnexion.TryGetValue(username, out nbr))
+                        {
+                            dictUserConnexion.Add(username, 0);
+                        }
+                        dictUserConnexion[username]++;
+                        nbr = dictUserConnexion[username];
+                        
+
+                        if (dictUserConnexion[username] == 5)
+                        {
+                            User.lockUnlockUser(username, true);
+                        }
+                        
                         labelError.Visible = true;
                     }
                     

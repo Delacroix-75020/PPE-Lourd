@@ -37,11 +37,11 @@ namespace ppelourd
             {
                 int roleid = int.Parse(rdr[4].ToString());
                 User.RoleType role = User.intToRoleType(roleid);
-                User AdminViews = new User(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), role);
+                User AdminViews = new User(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), role, bool.Parse(rdr[5].ToString()));
                 lesadmins.Add(AdminViews);
             }
             rdr.Close();
-            DGVAdmin.DataSource = null;
+            //DGVAdmin.DataSource = null;
             DGVAdmin.DataSource = lesadmins;
         }
         private void load_client()
@@ -337,51 +337,24 @@ namespace ppelourd
 
         private void DGVAdmin_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            /*if (0 <= e.RowIndex && e.RowIndex < lesadmins.Count)
+            if (0 <= e.RowIndex && e.RowIndex < lesadmins.Count)
             {
                 User admin = lesadmins[e.RowIndex];
-                string modifiedColumn = null;
-                if (e.ColumnIndex == 1)
+                if(e.ColumnIndex == 5)
                 {
-                    modifiedColumn = "username";
-                    admin.Nom = DGVAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                }
-                else if (e.ColumnIndex == 2)
-                {
-                    modifiedColumn = "email";
-                    admin.Email = DGVAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                }
-                else if (e.ColumnIndex == 3)
-                {
-                    modifiedColumn = "adresse";
-                    admin.Adresse = DGVAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                }
-                else if (e.ColumnIndex == 4)
-                {
-                    modifiedColumn = "email";
-                    admin.Email = DGVAdmin.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                }
-                if (modifiedColumn != null)
-                {
-                    MySqlConnection conn = DataBaseInfo.openConnection();
-                    string sql = $"UPDATE admin SET {modifiedColumn} = '{DGVClient.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()}' WHERE id = {client.Id} ";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    try
+                    if(admin.Role == User.RoleType.ADMIN)
                     {
-                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Vous ne pouvez pas verrouiller le compte d'un administrateur");
                     }
-                    catch
+                    else
                     {
-                        MessageBox.Show("Failed to Update User");
-                    }
-                    finally
-                    {
-                        conn.Close();
+                        User.lockUnlockUser(admin.Username, admin.Locked);
                     }
 
                 }
+                load_admin();
 
-            }*/
+            }
 
         }
     }

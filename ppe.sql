@@ -3,13 +3,17 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 25 avr. 2021 à 13:14
+-- Généré le : mer. 28 avr. 2021 à 10:40
 -- Version du serveur :  10.4.18-MariaDB
 -- Version de PHP : 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+DROP DATABASE IF EXISTS ppe;
+CREATE DATABASE ppe;
+USE ppe;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -22,9 +26,7 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-DROP DATABASE IF EXISTS ppe;
-CREATE DATABASE ppe;
-USE ppe;
+
 --
 -- Structure de la table `admin`
 --
@@ -34,18 +36,19 @@ CREATE TABLE `admin` (
   `username` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `pass` varchar(128) NOT NULL,
-  `Role` int(11) NOT NULL COMMENT '1 = Admin / 0 = Employée'
+  `Role` int(11) NOT NULL COMMENT '1 = Admin / 0 = Employée',
+  `locked` tinyint(1) DEFAULT 0 COMMENT '1 = compte verrouillé'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `email`, `pass`, `Role`) VALUES
-(1, 'Delacroix', 'ad.dela75020@gmail.com', '4f9996ad3b634ef65d772b702509236456662a35', 1),
-(4, 'Adrien', 'admin@gmail.com', '7af2d10b73ab7cd8f603937f7697cb5fe432c7ff', 1),
-(5, 'employe', 'employe@gmail.com', '107d348bff437c999a9ff192adcb78cb03b8ddc6', 0),
-(9, 'Pokimane', 'sel@sel.com', '9cf95dacd226dcf43da376cdb6cbba7035218921', 1);
+INSERT INTO `admin` (`id`, `username`, `email`, `pass`, `Role`, `locked`) VALUES
+(1, 'Delacroix', 'ad.dela75020@gmail.com', '4f9996ad3b634ef65d772b702509236456662a35', 0, 0),
+(4, 'Adrien', 'admin@gmail.com', '7af2d10b73ab7cd8f603937f7697cb5fe432c7ff', 1, 0),
+(5, 'employe', 'employe@gmail.com', '107d348bff437c999a9ff192adcb78cb03b8ddc6', 0, 0),
+(11, 'LeTest', 'LeTesteur@gmail.com', '41837ae81e18ab2c22bff7faf52042b9505c345d', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +138,49 @@ INSERT INTO `journal` (`id`, `dateconnect`, `etat`, `PersonID`) VALUES
 (37, '2021-04-25 12:21:18', 1, 4),
 (38, '2021-04-25 12:21:53', 0, 4),
 (39, '2021-04-25 12:22:09', 0, 4),
-(40, '2021-04-25 12:22:15', 1, 4);
+(40, '2021-04-25 12:22:15', 1, 4),
+(41, '2021-04-26 11:11:04', 1, 5),
+(42, '2021-04-26 11:12:16', 0, 1),
+(43, '2021-04-26 11:12:29', 0, 1),
+(44, '2021-04-26 11:12:36', 1, 1),
+(45, '2021-04-27 19:42:54', 1, 1),
+(46, '2021-04-27 19:43:19', 1, 1),
+(47, '2021-04-27 20:16:35', 1, 4),
+(48, '2021-04-27 20:17:59', 1, 1),
+(49, '2021-04-27 20:18:17', 0, 1),
+(50, '2021-04-27 20:18:20', 0, 1),
+(51, '2021-04-27 20:19:44', 0, 1),
+(52, '2021-04-27 20:25:07', 0, 1),
+(53, '2021-04-27 20:25:20', 0, 1),
+(54, '2021-04-27 20:25:37', 0, 1),
+(55, '2021-04-27 20:25:42', 0, 1),
+(56, '2021-04-27 20:25:48', 0, 1),
+(57, '2021-04-27 20:27:12', 0, 1),
+(58, '2021-04-27 20:27:21', 0, 1),
+(59, '2021-04-27 20:27:22', 0, 1),
+(60, '2021-04-27 20:27:23', 0, 1),
+(61, '2021-04-27 20:27:24', 0, 1),
+(62, '2021-04-27 20:29:15', 0, 1),
+(63, '2021-04-27 20:29:16', 0, 1),
+(64, '2021-04-27 20:29:17', 0, 1),
+(65, '2021-04-27 20:29:18', 0, 1),
+(66, '2021-04-27 20:29:18', 0, 1),
+(67, '2021-04-27 20:34:43', 1, 4),
+(68, '2021-04-27 20:43:10', 0, 4),
+(69, '2021-04-27 20:43:19', 1, 4),
+(70, '2021-04-27 20:44:56', 1, 4),
+(71, '2021-04-27 20:48:09', 1, 4),
+(72, '2021-04-27 20:54:34', 1, 4),
+(73, '2021-04-27 20:55:42', 1, 4),
+(74, '2021-04-27 20:56:13', 1, 5),
+(75, '2021-04-27 20:59:03', 0, 4),
+(76, '2021-04-27 20:59:04', 0, 4),
+(77, '2021-04-27 20:59:04', 0, 4),
+(78, '2021-04-27 20:59:05', 0, 4),
+(79, '2021-04-27 20:59:05', 0, 4),
+(80, '2021-04-27 20:59:06', 0, 4),
+(81, '2021-04-27 20:59:06', 0, 4),
+(82, '2021-04-27 20:59:12', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -186,7 +231,7 @@ INSERT INTO `produit` (`id_produit`, `nom_produit`, `p_motscles`, `description`,
 (2, 'Rétroviseur Renault ', '', 'Rétroviseur de la marque Renault avec une tes grande flexibilité ', 100, 39, 2, 2),
 (4, 'Volant GT sport +', 'volant, voiture, sport', 'Un volant en carbone de wish qui pèse environ 361 kg ce qui va te donner l\'impression de conduire un camtar', 200, 29, 1, 3),
 (6, 'downpipe Scania V8', 'scania, camion, downpipe, V8', 'Downpipe pour Scania V8 5ème génération, idéal pour une reprogrammation moteur', 0, 299.99, 4, 4),
-(7, 'jante pour bus ', 'jante, bus', 'jante en aluminium', 5, 45.5, 3, 5);
+(7, 'jante pour bus ', 'jante, bus,', 'jante en aluminium', 5, 45.5, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -277,7 +322,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `categorie`
@@ -301,7 +346,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT pour la table `journal`
 --
 ALTER TABLE `journal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT pour la table `produit`

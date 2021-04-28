@@ -190,11 +190,11 @@ namespace ppelourd
             // 
             // btndeleteAdmin
             // 
-            this.btndeleteAdmin.Location = new System.Drawing.Point(138, 435);
+            this.btndeleteAdmin.Location = new System.Drawing.Point(152, 435);
             this.btndeleteAdmin.Name = "btndeleteAdmin";
-            this.btndeleteAdmin.Size = new System.Drawing.Size(89, 49);
+            this.btndeleteAdmin.Size = new System.Drawing.Size(128, 46);
             this.btndeleteAdmin.TabIndex = 4;
-            this.btndeleteAdmin.Text = "Supprimer Operateur";
+            this.btndeleteAdmin.Text = "Supprimer Administrateur";
             this.btndeleteAdmin.UseVisualStyleBackColor = true;
             this.btndeleteAdmin.Click += new System.EventHandler(this.btndeleteAdmin_Click);
             // 
@@ -211,11 +211,11 @@ namespace ppelourd
             // 
             // insertoperator
             // 
-            this.insertoperator.Location = new System.Drawing.Point(24, 435);
+            this.insertoperator.Location = new System.Drawing.Point(6, 435);
             this.insertoperator.Name = "insertoperator";
-            this.insertoperator.Size = new System.Drawing.Size(89, 49);
+            this.insertoperator.Size = new System.Drawing.Size(128, 46);
             this.insertoperator.TabIndex = 2;
-            this.insertoperator.Text = "Insertion d\'operateur";
+            this.insertoperator.Text = "Ajouter Administrateur";
             this.insertoperator.UseVisualStyleBackColor = true;
             this.insertoperator.Click += new System.EventHandler(this.insertoperator_Click);
             // 

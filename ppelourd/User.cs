@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,13 +74,28 @@ namespace ppelourd
             }
         }
 
-        public User (int id, string username, string email,string password,  RoleType role)
+        private bool locked;
+        public bool Locked
+        {
+            get
+            {
+                return locked;
+            }
+
+            set
+            {
+                locked = value;
+            }
+        }
+
+        public User (int id, string username, string email,string password,  RoleType role, bool locked)
         {
             this.id = id;
             this.username = username;
             this.email = email;
             this.password = password;
             this.role = role;
+            this.locked = locked;
         }
 
         public static int roleTypeToInt(RoleType role)
@@ -111,6 +127,55 @@ namespace ppelourd
                     throw new Exception("Unknown Role Type");
 
             }
+        }
+
+        public static bool checkUserLocked(string username)
+        {
+            MySqlConnection conn = DataBaseInfo.openConnection();
+            string sql = $"Select locked FROM admin WHERE admin.username = '{username}' ";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            try
+            {
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    bool locked = bool.Parse(rdr[0].ToString());
+                    if (locked)
+                    {
+                        rdr.Close();
+                        conn.Close();
+                        return true;
+                    }
+                }
+                rdr.Close();
+                conn.Close();
+                return false;
+            }
+            catch
+            {
+
+            }
+            return false;
+        }
+
+        public static void lockUnlockUser(string username, bool locked)
+        {
+            MySqlConnection conn = DataBaseInfo.openConnection();
+            string sql = $"UPDATE admin SET locked = {locked} WHERE admin.username = '{username}' AND admin.Role <> 1 ";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }
