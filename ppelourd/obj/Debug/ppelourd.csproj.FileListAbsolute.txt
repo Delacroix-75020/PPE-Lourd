@@ -34,7 +34,6 @@ C:\Users\addel\source\repos\ppelourd\ppelourd\bin\Debug\System.Numerics.Vectors.
 C:\Users\addel\source\repos\ppelourd\ppelourd\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\addel\source\repos\ppelourd\ppelourd\obj\Debug\ppelourd.csproj.CopyComplete
 C:\Users\addel\source\repos\ppelourd\ppelourd\obj\Debug\ppelourd.admin.resources
-C:\Users\addel\source\repos\ppelourd\ppelourd\obj\Debug\ppelourd.UpdateParticipant.resources
 C:\Users\addel\source\repos\ppelourd\ppelourd\obj\Debug\ppelourd.Employe.resources
 C:\Users\addel\source\repos\ppelourd\ppelourd\obj\Debug\ppelourd.InsertProduit.resources
 C:\Users\addel\source\repos\ppelourd\ppelourd\obj\Debug\ppelourd.inscriptionClient.resources

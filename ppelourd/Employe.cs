@@ -28,7 +28,7 @@ namespace ppelourd
             MySqlConnection conn = null;
             try
             {
-                conn = DataBaseInfo.openConnection();
+                conn = DataBaseUtil.openConnection();
                 string sql = "SELECT * FROM produit";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
@@ -57,8 +57,7 @@ namespace ppelourd
             }
             }
             
-            
-
+          
         private void Operateur_Load(object sender, EventArgs e)
         {
             load_Produits();
@@ -75,7 +74,7 @@ namespace ppelourd
             try
             {
                 byuser.Clear();
-                conn = DataBaseInfo.openConnection();
+                conn = DataBaseUtil.openConnection();
                 string sql = $"SELECT users.username, panier.qte, commande.date_commande FROM panier, commande, users WHERE panier.ref_com = commande.ref_com AND panier.id_produit = {produit.Id} AND commande.id_u = users.id";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();

@@ -93,7 +93,7 @@ namespace ppelourd
             // 
             // btnsubmit
             // 
-            this.btnsubmit.Location = new System.Drawing.Point(287, 306);
+            this.btnsubmit.Location = new System.Drawing.Point(277, 306);
             this.btnsubmit.Name = "btnsubmit";
             this.btnsubmit.Size = new System.Drawing.Size(105, 40);
             this.btnsubmit.TabIndex = 6;

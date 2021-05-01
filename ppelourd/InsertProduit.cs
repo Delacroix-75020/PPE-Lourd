@@ -19,7 +19,7 @@ namespace ppelourd
         {
             InitializeComponent();
         }
-        string chainedeconnexion = "server=localhost;user id=root;database=ppe";
+        
         List<Categorie> lescategories = null;
         List<Image> lesimages = null;
 
@@ -28,10 +28,10 @@ namespace ppelourd
             labelVerif.Visible = false;
 
 
-            MySqlConnection conn = new MySqlConnection(chainedeconnexion);
+            MySqlConnection conn = null;
             try
             {
-                conn.Open();
+                conn = DataBaseUtil.openConnection();
                 string Libelle = txtLibelle.Text;
                 string MotsCles = txtMots.Text;
                 string Description = txtdesc.Text;
@@ -85,7 +85,7 @@ namespace ppelourd
             cbCategorie.ValueMember = "Id";
 
 
-            MySqlConnection conn = DataBaseInfo.openConnection();
+            MySqlConnection conn = DataBaseUtil.openConnection();
             string sql = "SELECT * from image";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             try

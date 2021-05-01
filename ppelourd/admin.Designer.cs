@@ -35,9 +35,9 @@ namespace ppelourd
             this.btnDeleteParticipant = new System.Windows.Forms.Button();
             this.DGVClient = new System.Windows.Forms.DataGridView();
             this.tabSalon = new System.Windows.Forms.TabPage();
-            this.btnDeleteSalon = new System.Windows.Forms.Button();
-            this.btnAddSalon = new System.Windows.Forms.Button();
-            this.DGVSalon = new System.Windows.Forms.DataGridView();
+            this.btnDeleteProduit = new System.Windows.Forms.Button();
+            this.btnAddProduit = new System.Windows.Forms.Button();
+            this.DGVProduit = new System.Windows.Forms.DataGridView();
             this.tabConnexion = new System.Windows.Forms.TabPage();
             this.DGVJournal = new System.Windows.Forms.DataGridView();
             this.tabUser = new System.Windows.Forms.TabPage();
@@ -48,7 +48,7 @@ namespace ppelourd
             this.tabParticipant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVClient)).BeginInit();
             this.tabSalon.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVSalon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVProduit)).BeginInit();
             this.tabConnexion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVJournal)).BeginInit();
             this.tabUser.SuspendLayout();
@@ -113,9 +113,9 @@ namespace ppelourd
             // 
             // tabSalon
             // 
-            this.tabSalon.Controls.Add(this.btnDeleteSalon);
-            this.tabSalon.Controls.Add(this.btnAddSalon);
-            this.tabSalon.Controls.Add(this.DGVSalon);
+            this.tabSalon.Controls.Add(this.btnDeleteProduit);
+            this.tabSalon.Controls.Add(this.btnAddProduit);
+            this.tabSalon.Controls.Add(this.DGVProduit);
             this.tabSalon.Location = new System.Drawing.Point(4, 25);
             this.tabSalon.Name = "tabSalon";
             this.tabSalon.Padding = new System.Windows.Forms.Padding(3);
@@ -124,36 +124,36 @@ namespace ppelourd
             this.tabSalon.Text = "Produit";
             this.tabSalon.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteSalon
+            // btnDeleteProduit
             // 
-            this.btnDeleteSalon.Location = new System.Drawing.Point(134, 428);
-            this.btnDeleteSalon.Name = "btnDeleteSalon";
-            this.btnDeleteSalon.Size = new System.Drawing.Size(90, 51);
-            this.btnDeleteSalon.TabIndex = 3;
-            this.btnDeleteSalon.Text = "Supprmier Produit";
-            this.btnDeleteSalon.UseVisualStyleBackColor = true;
-            this.btnDeleteSalon.Click += new System.EventHandler(this.btnDeleteSalon_Click);
+            this.btnDeleteProduit.Location = new System.Drawing.Point(134, 428);
+            this.btnDeleteProduit.Name = "btnDeleteProduit";
+            this.btnDeleteProduit.Size = new System.Drawing.Size(90, 51);
+            this.btnDeleteProduit.TabIndex = 3;
+            this.btnDeleteProduit.Text = "Supprmier Produit";
+            this.btnDeleteProduit.UseVisualStyleBackColor = true;
+            this.btnDeleteProduit.Click += new System.EventHandler(this.btnDeleteSalon_Click);
             // 
-            // btnAddSalon
+            // btnAddProduit
             // 
-            this.btnAddSalon.Location = new System.Drawing.Point(17, 428);
-            this.btnAddSalon.Name = "btnAddSalon";
-            this.btnAddSalon.Size = new System.Drawing.Size(90, 51);
-            this.btnAddSalon.TabIndex = 1;
-            this.btnAddSalon.Text = "Ajouter Produit";
-            this.btnAddSalon.UseVisualStyleBackColor = true;
-            this.btnAddSalon.Click += new System.EventHandler(this.btnAddSalon_Click);
+            this.btnAddProduit.Location = new System.Drawing.Point(17, 428);
+            this.btnAddProduit.Name = "btnAddProduit";
+            this.btnAddProduit.Size = new System.Drawing.Size(90, 51);
+            this.btnAddProduit.TabIndex = 1;
+            this.btnAddProduit.Text = "Ajouter Produit";
+            this.btnAddProduit.UseVisualStyleBackColor = true;
+            this.btnAddProduit.Click += new System.EventHandler(this.btnAddProduit_Click);
             // 
-            // DGVSalon
+            // DGVProduit
             // 
-            this.DGVSalon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVSalon.Location = new System.Drawing.Point(-4, 1);
-            this.DGVSalon.Name = "DGVSalon";
-            this.DGVSalon.RowHeadersWidth = 51;
-            this.DGVSalon.RowTemplate.Height = 24;
-            this.DGVSalon.Size = new System.Drawing.Size(1002, 421);
-            this.DGVSalon.TabIndex = 0;
-            this.DGVSalon.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVSalon_CellEndEdit);
+            this.DGVProduit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVProduit.Location = new System.Drawing.Point(-4, 1);
+            this.DGVProduit.Name = "DGVProduit";
+            this.DGVProduit.RowHeadersWidth = 51;
+            this.DGVProduit.RowTemplate.Height = 24;
+            this.DGVProduit.Size = new System.Drawing.Size(1002, 421);
+            this.DGVProduit.TabIndex = 0;
+            this.DGVProduit.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVSalon_CellEndEdit);
             // 
             // tabConnexion
             // 
@@ -190,11 +190,11 @@ namespace ppelourd
             // 
             // btndeleteAdmin
             // 
-            this.btndeleteAdmin.Location = new System.Drawing.Point(152, 435);
+            this.btndeleteAdmin.Location = new System.Drawing.Point(158, 435);
             this.btndeleteAdmin.Name = "btndeleteAdmin";
             this.btndeleteAdmin.Size = new System.Drawing.Size(128, 46);
             this.btndeleteAdmin.TabIndex = 4;
-            this.btndeleteAdmin.Text = "Supprimer Administrateur";
+            this.btndeleteAdmin.Text = "Supprimer Employé";
             this.btndeleteAdmin.UseVisualStyleBackColor = true;
             this.btndeleteAdmin.Click += new System.EventHandler(this.btndeleteAdmin_Click);
             // 
@@ -215,7 +215,7 @@ namespace ppelourd
             this.insertoperator.Name = "insertoperator";
             this.insertoperator.Size = new System.Drawing.Size(128, 46);
             this.insertoperator.TabIndex = 2;
-            this.insertoperator.Text = "Ajouter Administrateur";
+            this.insertoperator.Text = "Ajouter Employé";
             this.insertoperator.UseVisualStyleBackColor = true;
             this.insertoperator.Click += new System.EventHandler(this.insertoperator_Click);
             // 
@@ -235,7 +235,7 @@ namespace ppelourd
             this.tabParticipant.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVClient)).EndInit();
             this.tabSalon.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DGVSalon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVProduit)).EndInit();
             this.tabConnexion.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVJournal)).EndInit();
             this.tabUser.ResumeLayout(false);
@@ -254,9 +254,9 @@ namespace ppelourd
         private System.Windows.Forms.TabPage tabConnexion;
         private System.Windows.Forms.Button btnDeleteParticipant;
         private System.Windows.Forms.DataGridView DGVJournal;
-        private System.Windows.Forms.DataGridView DGVSalon;
-        private System.Windows.Forms.Button btnDeleteSalon;
-        private System.Windows.Forms.Button btnAddSalon;
+        private System.Windows.Forms.DataGridView DGVProduit;
+        private System.Windows.Forms.Button btnDeleteProduit;
+        private System.Windows.Forms.Button btnAddProduit;
         private System.Windows.Forms.DataGridView DGVClient;
         private System.Windows.Forms.TabPage tabUser;
         private System.Windows.Forms.DataGridView DGVAdmin;

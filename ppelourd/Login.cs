@@ -28,7 +28,7 @@ namespace ppelourd
             try
             {
                 string dt = t.ToString("yyyy-MM-dd HH:mm:ss");
-                conn = DataBaseInfo.openConnection();
+                conn = DataBaseUtil.openConnection();
                 string sql = $"INSERT INTO journal (dateconnect,etat , PersonID) VALUES ('{dt}', {etat}, {id_admin})";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 int res = cmd.ExecuteNonQuery();
@@ -47,7 +47,6 @@ namespace ppelourd
             }
             
         }
-        string chainedeconnexion = "server=localhost;user id=root;database=ppe";
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (txtusername.Text == "" || txtpassword.Text == "")
@@ -68,8 +67,7 @@ namespace ppelourd
                     return ;
                 }
 
-                MySqlConnection conn = new MySqlConnection(chainedeconnexion);
-                conn.Open();
+                MySqlConnection conn = DataBaseUtil.openConnection(); 
                 string sql = $"Select id, username, pass, Role from admin where username='{username}'";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
@@ -111,6 +109,7 @@ namespace ppelourd
                 {
                     labelError.Visible = true;
                 }
+                conn.Close();
             }
             catch
             {

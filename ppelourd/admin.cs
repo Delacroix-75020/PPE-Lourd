@@ -73,8 +73,8 @@ namespace ppelourd
                 lesproduits.Add(ProduitView);
             }
             rdr.Close();
-            DGVSalon.DataSource = null;
-            DGVSalon.DataSource = lesproduits;
+            DGVProduit.DataSource = null;
+            DGVProduit.DataSource = lesproduits;
         }
 
         private void load_journal()
@@ -99,25 +99,14 @@ namespace ppelourd
         }
 
 
-
-
-
-
         private void admin_Load(object sender, EventArgs e)
         {
-            conn = DataBaseInfo.openConnection();
+            conn = DataBaseUtil.openConnection();
             load_client();
             load_produit();
             load_admin();
             load_journal();
             
-        }
-
-        private void btnUpdateParticipant_Click(object sender, EventArgs e)
-        {
-            UpdateParticipant update = new UpdateParticipant();
-            update.Show();
-
         }
 
         private void btnDeleteParticipant_Click(object sender, EventArgs e)
@@ -138,17 +127,12 @@ namespace ppelourd
 
         }
 
-        private void btnAddParticipant_Click(object sender, EventArgs e)
+        private void btnAddProduit_Click(object sender, EventArgs e)
         {
+            AjouterProduit();
         }
 
-        private void btnUpdateSalon_Click(object sender, EventArgs e)
-        {
-         
-
-        }
-
-        private void btnAddSalon_Click(object sender, EventArgs e)
+        private void AjouterProduit()
         {
             InsertProduit insertionProduit = new InsertProduit();
             insertionProduit.ShowDialog();
@@ -158,7 +142,7 @@ namespace ppelourd
         private void btnDeleteSalon_Click(object sender, EventArgs e)
         {
             List<Produit> selected = new List<Produit>();
-            foreach (DataGridViewRow row in DGVSalon.SelectedRows)
+            foreach (DataGridViewRow row in DGVProduit.SelectedRows)
             {
                 selected.Add(lesproduits[row.Index]);
                 //DGVParticipant.Rows.RemoveAt(row.Index);
@@ -207,7 +191,7 @@ namespace ppelourd
                 }
                 if (modifiedColumn != null)
                 {
-                    MySqlConnection conn = DataBaseInfo.openConnection();
+                    MySqlConnection conn = DataBaseUtil.openConnection();
                     string sql = $"UPDATE users SET {modifiedColumn} = '{DGVClient.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()}' WHERE id = {client.Id} ";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     try
@@ -242,34 +226,34 @@ namespace ppelourd
                 if (e.ColumnIndex == 1)
                 {
                     modifiedColumn = "nom_produit";
-                    strvalue = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    strvalue = DGVProduit.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 else if (e.ColumnIndex == 2)
                 {
                     modifiedColumn = "p_motscles";
-                    strvalue = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    strvalue = DGVProduit.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 else if (e.ColumnIndex == 3)
                 {
                     modifiedColumn = "description";
-                    strvalue = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    strvalue = DGVProduit.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 else if (e.ColumnIndex == 4)
                 {
                     modifiedColumn = "qteProduit";
-                    intvalue = int.Parse(DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                    intvalue = int.Parse(DGVProduit.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
                 }
                 else if (e.ColumnIndex == 5)
                 {
                     
                     modifiedColumn = "prix";
-                    prix = float.Parse(DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                    prix = float.Parse(DGVProduit.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
                     
                 }
                 else if (e.ColumnIndex == 6)
                 {
                     modifiedColumn = "id_categorie";
-                    string tmp = DGVSalon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    string tmp = DGVProduit.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                     intvalue = Categorie.stringToId(tmp);
                     if (intvalue == 0)
                     {
@@ -280,7 +264,7 @@ namespace ppelourd
 
                 if (modifiedColumn != null)
                 {
-                    MySqlConnection conn = DataBaseInfo.openConnection();
+                    MySqlConnection conn = DataBaseUtil.openConnection();
                     string sql = null;
                     if (strvalue != null)
                     {
@@ -316,7 +300,6 @@ namespace ppelourd
             }
 
         }
-
         private void btndeleteAdmin_Click(object sender, EventArgs e)
         {
             List<User> selected = new List<User>();
@@ -357,5 +340,6 @@ namespace ppelourd
             }
 
         }
+
     }
 }

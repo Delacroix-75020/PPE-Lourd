@@ -39,7 +39,7 @@ namespace ppelourd
             {
                 role = User.RoleType.ADMIN;
             }
-            MySqlConnection conn = DataBaseInfo.openConnection();
+            MySqlConnection conn = DataBaseUtil.openConnection();
             string sql = $"insert into admin (username,email ,pass, Role) Values ('{username}', '{email}','{password}', {User.roleTypeToInt(role)})";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             try

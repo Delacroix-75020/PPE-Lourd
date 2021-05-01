@@ -37,7 +37,7 @@ namespace ppelourd
         public static List<Categorie> getAllCategories()
         {
             List<Categorie> lescategories = new List<Categorie>();
-            MySqlConnection conn = DataBaseInfo.openConnection();
+            MySqlConnection conn = DataBaseUtil.openConnection();
             string sql = "SELECT * from categorie";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             try

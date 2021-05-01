@@ -17,7 +17,7 @@ namespace ppelourd
         {
             InitializeComponent();
         }
-        string chainedeconnexion = "server=localhost;user id = root; database=lourdppe";
+        
 
         private void inscriptionParticipant_Load(object sender, EventArgs e)
         {
@@ -28,11 +28,12 @@ namespace ppelourd
         {
             labelVerif.Visible = false;
 
-
-            MySqlConnection conn = new MySqlConnection(chainedeconnexion);
+            MySqlConnection conn = null;
+           
             try
             {
-                conn.Open();
+
+                conn = DataBaseUtil.openConnection();
                 string nom = txtusername.Text;
                 string tel = txttel.Text;
                 string departement = txtadresse.Text;
