@@ -24,9 +24,6 @@ namespace ppelourd
             if (MonFormLogin.DialogResult == DialogResult.OK)
             {
                 String NiveauUtilisateur = MonFormLogin.StrLevel;
-                ///String LeNomutilisateur = MonFormLogin.NomUtilisateur;
-                ///MonFormLogin.Close();
-                ///Application.Run(new admin(NiveauUtilisateur));
                 MonFormLogin.Close();
                 MessageBox.Show("Vous vous êtes connecté avec succès");
                 if (MonFormLogin.role == 1)

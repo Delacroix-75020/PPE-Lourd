@@ -8,7 +8,7 @@ namespace ppelourd
 {
     class Client
     {
-        //List<Produit> salons = new List<Produit>();
+        
 
         private int id;
         public int Id
