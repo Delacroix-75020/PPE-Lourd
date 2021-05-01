@@ -28,38 +28,25 @@ namespace ppelourd
         {
             labelVerif.Visible = false;
 
-            MySqlConnection conn = null;
            
-            try
-            {
 
-                conn = DataBaseUtil.openConnection();
                 string nom = txtusername.Text;
                 string tel = txttel.Text;
                 string departement = txtadresse.Text;
                 string email = txtemail.Text;
                 string sql = $"insert into users (username, tel, adresse, email) Values ('{nom}', '{tel}', '{departement}', '{email}') ";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                if (cmd.ExecuteNonQuery() > 0)
+                if (DataBaseUtil.executeNonQuery(sql) > 0)
                 {
                     labelVerif.ForeColor = Color.Green;
                     labelVerif.Visible = true;
                     labelVerif.Text = " Les informations ont bien été enregistrées ";
                 }
-                
+                else
+                {
+                    MessageBox.Show("Echec de l'ajout d'un client");
+                }
+            
 
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-
-            }
-            finally
-            {
-                conn.Close();
-            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

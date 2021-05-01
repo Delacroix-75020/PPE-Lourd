@@ -39,28 +39,20 @@ namespace ppelourd
             {
                 role = User.RoleType.ADMIN;
             }
-            MySqlConnection conn = DataBaseUtil.openConnection();
+ 
             string sql = $"insert into admin (username,email ,pass, Role) Values ('{username}', '{email}','{password}', {User.roleTypeToInt(role)})";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            try
-            {
-                if (cmd.ExecuteNonQuery() > 0)
+            
+
+                if (DataBaseUtil.executeNonQuery(sql) > 0)
                 {
                     this.DialogResult = DialogResult.OK;
                 }
                 else
                 {
-                    MessageBox.Show("Failed to insert user");
+                    MessageBox.Show("User " + username + " exists already");
                 }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("User " + username + " exists already");
-            }
-            finally
-            {
-                conn.Close();
-            }
+      
+
             
         }
 

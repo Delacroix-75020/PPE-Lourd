@@ -24,28 +24,13 @@ namespace ppelourd
         }
         private void AjouterJournalConnexion(int id_admin, DateTime t, bool etat)
         {
-            MySqlConnection conn = null;
-            try
-            {
-                string dt = t.ToString("yyyy-MM-dd HH:mm:ss");
-                conn = DataBaseUtil.openConnection();
-                string sql = $"INSERT INTO journal (dateconnect,etat , PersonID) VALUES ('{dt}', {etat}, {id_admin})";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                int res = cmd.ExecuteNonQuery();
 
-            }
-            catch
+            string dt = t.ToString("yyyy-MM-dd HH:mm:ss");
+            string sql = $"INSERT INTO journal (dateconnect, etat, PersonID) VALUES ('{dt}', {etat}, {id_admin})";
+            if (DataBaseUtil.executeNonQuery(sql) == -1)
             {
                 MessageBox.Show("Erreur lors de l'insertion dans le journal");
             }
-            finally
-            {
-               if(conn != null)
-                {
-                    conn.Close();
-                } 
-            }
-            
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -67,10 +52,8 @@ namespace ppelourd
                     return ;
                 }
 
-                MySqlConnection conn = DataBaseUtil.openConnection(); 
                 string sql = $"Select id, username, pass, Role from admin where username='{username}'";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
+                MySqlDataReader rdr = DataBaseUtil.executeSelect(sql);
                 if (rdr.Read())
                 {
                     labelError.Visible = false;
@@ -79,7 +62,6 @@ namespace ppelourd
                     bool etat = password.Equals(pass.ToLower());
                     role = int.Parse(rdr[3].ToString());
                     nomoperateur = rdr[1].ToString();
-                    AjouterJournalConnexion(id, DateTime.Now, etat);
                     if (etat)
                     {
                         this.DialogResult = DialogResult.OK;
@@ -102,14 +84,15 @@ namespace ppelourd
                         
                         labelError.Visible = true;
                     }
-                    
+                    rdr.Close();
+                    AjouterJournalConnexion(id, DateTime.Now, etat);
+
 
                 }
                 else
                 {
                     labelError.Visible = true;
                 }
-                conn.Close();
             }
             catch
             {

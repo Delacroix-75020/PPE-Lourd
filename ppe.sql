@@ -374,7 +374,7 @@ ALTER TABLE `commande`
 -- Contraintes pour la table `journal`
 --
 ALTER TABLE `journal`
-  ADD CONSTRAINT `journal_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `admin` (`id`);
+  ADD CONSTRAINT `journal_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `admin` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `panier`

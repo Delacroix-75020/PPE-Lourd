@@ -26,44 +26,27 @@ namespace ppelourd
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             labelVerif.Visible = false;
-
-
-            MySqlConnection conn = null;
-            try
+            string Libelle = txtLibelle.Text;
+            string MotsCles = txtMots.Text;
+            string Description = txtdesc.Text;
+            decimal Quantite = nudQuantite.Value;
+            float Prix = float.Parse(txtPrix.Text);
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+            string strprix = Prix.ToString(nfi);
+            int idcategorie = (cbCategorie.SelectedItem as Categorie).Id;
+            int idimage = (cbImage.SelectedItem as Image).Id;
+            string sql = $"insert into produit (nom_produit, p_motscles, description, qteProduit, prix, id_categorie, id_image) Values ('{Libelle}', '{MotsCles}', '{Description}', {Quantite}, {strprix}, {idcategorie}, {idimage}) ";
+            if (DataBaseUtil.executeNonQuery(sql) > 0)
             {
-                conn = DataBaseUtil.openConnection();
-                string Libelle = txtLibelle.Text;
-                string MotsCles = txtMots.Text;
-                string Description = txtdesc.Text;
-                decimal Quantite = nudQuantite.Value;    
-                float Prix = float.Parse(txtPrix.Text);
-                NumberFormatInfo nfi = new NumberFormatInfo();
-                nfi.NumberDecimalSeparator = ".";
-                string strprix = Prix.ToString(nfi);
-                int idcategorie = (cbCategorie.SelectedItem as Categorie).Id;
-                int idimage = (cbImage.SelectedItem as Image).Id;
-                string sql = $"insert into produit (nom_produit, p_motscles, description, qteProduit, prix, id_categorie, id_image) Values ('{Libelle}', '{MotsCles}', '{Description}', {Quantite}, {strprix}, {idcategorie}, {idimage}) ";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    labelVerif.ForeColor = Color.Green;
-                    labelVerif.Visible = true;
-                    labelVerif.Text = " Les informations ont bien été enregistrées ";
-                    this.DialogResult = DialogResult.OK;
-                }
-
-
+                labelVerif.ForeColor = Color.Green;
+                labelVerif.Visible = true;
+                labelVerif.Text = " Les informations ont bien été enregistrées ";
+                this.DialogResult = DialogResult.OK;
             }
-
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
-
-
-            }
-            finally
-            {
-                conn.Close();
+                MessageBox.Show("Echec d'ajout du produit");
             }
         }
 
@@ -85,12 +68,10 @@ namespace ppelourd
             cbCategorie.ValueMember = "Id";
 
 
-            MySqlConnection conn = DataBaseUtil.openConnection();
             string sql = "SELECT * from image";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
             try
             {
-                MySqlDataReader rdr = cmd.ExecuteReader();
+                MySqlDataReader rdr = DataBaseUtil.executeSelect(sql);
                 lesimages = new List<Image>();
                 while (rdr.Read())
                 {
@@ -109,10 +90,6 @@ namespace ppelourd
             catch
             {
                 MessageBox.Show("Erreur de chargement de la liste des Images");
-            }
-            finally
-            {
-                conn.Close();
             }
         }
     }

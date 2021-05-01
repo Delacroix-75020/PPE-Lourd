@@ -183,24 +183,13 @@ namespace ppelourd
                 }
                 if (modifiedColumn != null)
                 {
-                    MySqlConnection conn = DataBaseUtil.openConnection();
                     string sql = $"UPDATE users SET {modifiedColumn} = '{DGVClient.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()}' WHERE id = {client.Id} ";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch
+                    
+                    if(DataBaseUtil.executeNonQuery(sql) == -1)
                     {
                         MessageBox.Show("Failed to Update User");
                     }
-                    finally
-                    {
-                        conn.Close();
-                    }
-
-                }
-                
+                }       
             }
 
 
@@ -256,7 +245,6 @@ namespace ppelourd
 
                 if (modifiedColumn != null)
                 {
-                    MySqlConnection conn = DataBaseUtil.openConnection();
                     string sql = null;
                     if (strvalue != null)
                     {
@@ -273,25 +261,14 @@ namespace ppelourd
                     {
                         sql = $"UPDATE produit SET {modifiedColumn} = {intvalue} WHERE id_produit = {produit.Id} ";
                     }
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch
+                    if (DataBaseUtil.executeNonQuery(sql) == -1)
                     {
                         MessageBox.Show("Failed to Update User");
                     }
-                    finally
-                    {
-                        conn.Close();
-                    }
-
                 }
-
             }
-
         }
+
         private void btndeleteAdmin_Click(object sender, EventArgs e)
         {
             List<User> selected = new List<User>();

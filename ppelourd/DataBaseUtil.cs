@@ -42,8 +42,9 @@ namespace ppelourd
                 return cmd.ExecuteNonQuery();
 
             }
-            catch
+            catch (Exception e)
             {
+                
                 return -1;
             }
         }

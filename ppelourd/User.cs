@@ -131,25 +131,22 @@ namespace ppelourd
 
         public static bool checkUserLocked(string username)
         {
-            MySqlConnection conn = DataBaseUtil.openConnection();
+           
             string sql = $"Select locked FROM admin WHERE admin.username = '{username}' ";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
 
             try
             {
-                MySqlDataReader rdr = cmd.ExecuteReader();
+                MySqlDataReader rdr = DataBaseUtil.executeSelect(sql);
                 while (rdr.Read())
                 {
                     bool locked = bool.Parse(rdr[0].ToString());
                     if (locked)
                     {
                         rdr.Close();
-                        conn.Close();
                         return true;
                     }
                 }
                 rdr.Close();
-                conn.Close();
                 return false;
             }
             catch
@@ -159,22 +156,14 @@ namespace ppelourd
             return false;
         }
 
-        public static void lockUnlockUser(string username, bool locked)
+        public static bool lockUnlockUser(string username, bool locked)
         {
-            MySqlConnection conn = DataBaseUtil.openConnection();
             string sql = $"UPDATE admin SET locked = {locked} WHERE admin.username = '{username}' AND admin.Role <> 1 ";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-            try
-            {
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                
-            }
-            catch
-            {
+            return (DataBaseUtil.executeNonQuery(sql) > 0);
 
-            }
+            
+              
             
         }
     }
