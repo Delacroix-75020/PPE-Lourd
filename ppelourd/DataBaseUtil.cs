@@ -17,6 +17,38 @@ namespace ppelourd
                 return chainedeconnexion;
             }
         }
+        
+        private static MySqlConnection conn = openConnection();
+        public static MySqlDataReader executeSelect(string sql)
+        {
+            
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                return rdr;
+            }
+            catch
+            {
+                return null;
+            }          
+        }
+        public static int executeNonQuery(string sql)
+        {
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                return cmd.ExecuteNonQuery();
+
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+
 
         public static MySqlConnection openConnection()
         {

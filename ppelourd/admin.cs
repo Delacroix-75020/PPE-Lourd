@@ -25,14 +25,12 @@ namespace ppelourd
         List<User> lesadmins = new List<User>();
         List<Journal> lesjournaux = new List<Journal>();
 
-        MySqlConnection conn = null;
 
         private void load_admin()
         {
             lesadmins.Clear();
             string sql = "Select * from admin";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            MySqlDataReader rdr = DataBaseUtil.executeSelect(sql);
             while (rdr.Read())
             {
                 int roleid = int.Parse(rdr[4].ToString());
@@ -47,9 +45,8 @@ namespace ppelourd
         private void load_client()
         {
             lesclients.Clear();
-            string sql = "Select * from users ";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            string sql = "Select * from users ";         
+            MySqlDataReader rdr = DataBaseUtil.executeSelect(sql);
             while (rdr.Read())
             {
                 Client ClientView = new Client(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString());
@@ -65,8 +62,7 @@ namespace ppelourd
         {
             lesproduits.Clear();
             string sql = "SELECT produit.*, categorie.nom_categorie from produit, categorie WHERE produit.id_categorie = categorie.id_categorie";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            MySqlDataReader rdr = DataBaseUtil.executeSelect(sql);
             while (rdr.Read())
             {
                 Produit ProduitView = new Produit(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), int.Parse(rdr[4].ToString()), float.Parse(rdr[5].ToString()), rdr[8].ToString());
@@ -83,8 +79,7 @@ namespace ppelourd
             DateTime dt = DateTime.Now.Subtract(new TimeSpan(3,0,0,0,0));
             string strdate = Journal.dateTimeToSQLString(dt);
             string sql = $"SELECT username, dateconnect, role, etat from journal, admin WHERE journal.PersonID = admin.id AND dateconnect > '{strdate}' ORDER BY dateconnect DESC";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            MySqlDataReader rdr = DataBaseUtil.executeSelect(sql);
             while (rdr.Read())
             {
                 dt = DateTime.Parse(rdr[1].ToString());
@@ -101,7 +96,6 @@ namespace ppelourd
 
         private void admin_Load(object sender, EventArgs e)
         {
-            conn = DataBaseUtil.openConnection();
             load_client();
             load_produit();
             load_admin();
@@ -120,8 +114,7 @@ namespace ppelourd
             foreach (Client p in selected)
             {
                 string sql = "DELETE FROM users WHERE id = '" + p.Id + "'";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
+                DataBaseUtil.executeNonQuery(sql);
             }
             load_client();
 
@@ -150,8 +143,7 @@ namespace ppelourd
             foreach (Produit s in selected)
             {
                 string sql = "DELETE FROM produit WHERE id_produit = " + s.Id;
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
+                DataBaseUtil.executeNonQuery(sql);
             }
             load_produit();
         }
@@ -311,8 +303,8 @@ namespace ppelourd
             foreach (User s in selected)
             {
                 string sql = "DELETE FROM admin WHERE id = " + s.Id;
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
+                DataBaseUtil.executeNonQuery(sql);
+              
             }
             load_admin();
 
@@ -341,5 +333,9 @@ namespace ppelourd
 
         }
 
+        private void DGVClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

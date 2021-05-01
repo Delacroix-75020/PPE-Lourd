@@ -109,6 +109,7 @@ namespace ppelourd
             this.DGVClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGVClient.Size = new System.Drawing.Size(998, 425);
             this.DGVClient.TabIndex = 0;
+            this.DGVClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVClient_CellContentClick);
             this.DGVClient.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVParticipant_CellEndEdit);
             // 
             // tabSalon

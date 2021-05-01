@@ -37,12 +37,10 @@ namespace ppelourd
         public static List<Categorie> getAllCategories()
         {
             List<Categorie> lescategories = new List<Categorie>();
-            MySqlConnection conn = DataBaseUtil.openConnection();
             string sql = "SELECT * from categorie";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
             try
             {
-                MySqlDataReader rdr = cmd.ExecuteReader();
+                MySqlDataReader rdr = DataBaseUtil.executeSelect(sql);
                 lescategories = new List<Categorie>();
                 while (rdr.Read())
                 {
@@ -61,10 +59,7 @@ namespace ppelourd
             {
                 return null;
             }
-            finally
-            {
-                conn.Close();
-            }
+
         }
 
         public static int stringToId(string name)
