@@ -39,7 +39,7 @@ namespace ppelourd
                 lesadmins.Add(AdminViews);
             }
             rdr.Close();
-            //DGVAdmin.DataSource = null;
+            DGVAdmin.DataSource = null;
             DGVAdmin.DataSource = lesadmins;
         }
         private void load_client()
@@ -54,7 +54,6 @@ namespace ppelourd
 
             }
             rdr.Close();
-            //updateParticipantSalon();
             DGVClient.DataSource = null;
             DGVClient.DataSource = lesclients;
         }

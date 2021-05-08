@@ -34,6 +34,7 @@ namespace ppelourd
             this.labelDate = new System.Windows.Forms.Label();
             this.labelnom = new System.Windows.Forms.Label();
             this.DGVBuy = new System.Windows.Forms.DataGridView();
+            this.btnToPDF = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVBuy)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,12 +86,23 @@ namespace ppelourd
             this.DGVBuy.Size = new System.Drawing.Size(809, 288);
             this.DGVBuy.TabIndex = 7;
             // 
+            // btnToPDF
+            // 
+            this.btnToPDF.Location = new System.Drawing.Point(641, 105);
+            this.btnToPDF.Name = "btnToPDF";
+            this.btnToPDF.Size = new System.Drawing.Size(111, 25);
+            this.btnToPDF.TabIndex = 8;
+            this.btnToPDF.Text = "Generer PDF";
+            this.btnToPDF.UseVisualStyleBackColor = true;
+            this.btnToPDF.Click += new System.EventHandler(this.btnToPDF_Click);
+            // 
             // Employe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(845, 463);
+            this.Controls.Add(this.btnToPDF);
             this.Controls.Add(this.DGVBuy);
             this.Controls.Add(this.labelnom);
             this.Controls.Add(this.labelDate);
@@ -111,5 +123,6 @@ namespace ppelourd
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Label labelnom;
         private System.Windows.Forms.DataGridView DGVBuy;
+        private System.Windows.Forms.Button btnToPDF;
     }
 }

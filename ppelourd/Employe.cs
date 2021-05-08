@@ -81,5 +81,12 @@ namespace ppelourd
                 MessageBox.Show("La Liste n'a pas pu etre récuperer");
             }
         }
+
+        private void btnToPDF_Click(object sender, EventArgs e)
+        {
+            Produit produit = cbProduit.SelectedItem as Produit;
+            ProduitToPDF toPDF = new ProduitToPDF(byuser, produit);
+            toPDF.ToPDF(@"C:\users\addel\"+produit.Nom+".pdf");
+        }
     }
 }

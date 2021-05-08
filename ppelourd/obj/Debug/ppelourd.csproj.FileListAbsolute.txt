@@ -38,3 +38,9 @@ C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\obj\Debug\ppelourd.c
 C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\obj\Debug\ppelourd.csproj.CopyComplete
 C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\obj\Debug\ppelourd.exe
 C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\obj\Debug\ppelourd.pdb
+C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\bin\Debug\PdfSharp.Charting.dll
+C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\bin\Debug\PdfSharp.dll
+C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\bin\Debug\PdfSharp.xml
+C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\bin\Debug\PdfSharp.Charting.xml
+C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\addel\OneDrive\Documents\GitHub\PPE-Lourd\ppelourd\bin\Debug\de\PdfSharp.Charting.resources.dll
